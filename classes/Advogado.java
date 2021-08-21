@@ -9,12 +9,12 @@ public class Advogado {
         getDados();
     }
 
-    Scanner ler = new Scanner(System.in);
-    String nome, data_admitido;
-    int cpf, telefone;
+    private Scanner ler = new Scanner(System.in);
+    private String nome, data_admitido;
+    private int cpf, telefone;
     Departamento departamento;
 
-    void getDados() {
+    private void getDados() {
         System.out.println("Nome do advogado: ");
         nome = ler.nextLine();
         System.out.println("Número do CPF: ");
@@ -27,17 +27,17 @@ public class Advogado {
 
     }
 
-    void switchDepartamento() {
+    public void switchDepartamento() {
         getDepartamento();
     }
 
-    void getDepartamento() {
+    private void getDepartamento() {
         System.out.println("Digite o Departamento: ");
         departamento = new Departamento();
     }
 
     // pode ser usado tanto no construtor quanto para trocar o departamento
-    void exibir() {
+    public void exibir() {
         System.out.println("Exibindo dados do Advogado");
         System.out.println("Nome: " + nome);
         System.out.println("CPF: " + cpf);
