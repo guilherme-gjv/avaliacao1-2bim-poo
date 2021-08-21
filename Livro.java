@@ -95,18 +95,19 @@ public class Livro {
       if (diffrence > 10) {
         System.out
             .println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + calcular(preco));
-        ;
+
       } else {
         System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + preco);
       }
     }
-    
+
   }
 
   public float calcular(float preco) {
-    preco = this.preco + (this.preco * (10 / 100));
+
+    preco = preco + preco * 10 / 100;
 
     return preco;
   }
-  
+
 }
