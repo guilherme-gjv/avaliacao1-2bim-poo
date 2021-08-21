@@ -47,6 +47,8 @@ public class Livro {
     System.out.println("\n------LIVRO CADASTRADO NO SISTEMA------\n");
     disponivel = true;
     status(disponivel);
+    ler1.close();
+    ler2.close();
   }
 
   public boolean status(boolean disponivel) {
@@ -70,6 +72,7 @@ public class Livro {
     System.out.println("\n------Empréstimo realizado com sucesso--------");
     disponivel = false;
     status(disponivel);
+    ler.close();
   }
 
   public void devolucao() {
@@ -99,6 +102,7 @@ public class Livro {
       } else {
         System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + preco);
       }
+      ler.close();
     }
 
   }
