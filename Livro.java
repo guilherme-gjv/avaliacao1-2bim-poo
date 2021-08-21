@@ -100,6 +100,7 @@ public class Livro {
         System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + preco);
       }
     }
+    
   }
 
   public float calcular(float preco) {
@@ -107,5 +108,5 @@ public class Livro {
 
     return preco;
   }
-
+  
 }
