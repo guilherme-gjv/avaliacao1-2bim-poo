@@ -108,10 +108,12 @@ public class Livro {
       }
       ler.close();
     }
+
   }
 
   public float calcular(float preco) {
-    preco = this.preco + (this.preco * (10 / 100));
+
+    preco = preco + preco * 10 / 100;
 
     return preco;
   }
