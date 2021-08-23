@@ -5,7 +5,11 @@ public class Menu {
     Scanner ler = new Scanner(System.in);
 
     Menu() {
-        exibirMenu();
+        //o ciclo só para quando a variavel escolha de exibirMenu() for 0
+        int i = 1;
+        do {
+            exibirMenu();
+        } while (i == 1);
     }
 
     void exibirMenu() {
