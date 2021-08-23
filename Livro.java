@@ -95,10 +95,14 @@ public class Livro {
       long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
       System.out.println("A diferenca é: " + diffrence);
 
+      float novopreco = 0;
       if (diffrence > 10) {
-        System.out
-            .println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + calcular(preco));
-
+        while (diffrence > 10) {
+          novopreco = novopreco + calcular(preco);
+          diffrence--;
+        }
+        System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + novopreco);
+        ;
       } else {
         System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + preco);
       }
