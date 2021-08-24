@@ -3,9 +3,13 @@ import java.util.Scanner;
 public class Menu {
 
     Scanner ler = new Scanner(System.in);
+    Livro livro;
+    Advogado advogado;
 
     Menu() {
         //o ciclo só para quando a variavel escolha de exibirMenu() for 0
+        livro = new Livro();
+        advogado = new Advogado();
         int i = 1;
         do {
             exibirMenu();
@@ -56,11 +60,11 @@ public class Menu {
 
     // Exibir Advogados, Livros, Empréstimos
     void exibirAdLiEm() {
-
+        
     }
 
     void emprestimo() {
-
+        livro.emprestimo();
     }
 
     void devolver() {
@@ -69,7 +73,7 @@ public class Menu {
 
     // trocar o departamento do advogado
     void trocarDepAdvogado() {
-
+       advogado.switchDepartamento();
     }
 
     // Exibir os títulos dos livros que estão emprestados de uma área específica

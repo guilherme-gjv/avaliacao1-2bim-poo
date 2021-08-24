@@ -1,4 +1,7 @@
 public class Gerenciador {
     
+    public Gerenciador() {
+        
+    }
 }
-// vai ser necessaria no Menu
+//talvez vai ser necessaria no Menu
