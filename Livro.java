@@ -28,6 +28,10 @@ public class Livro {
     System.out.println("\n-----------------------------------\n");
   }
 
+  public void exibirTitulo() {
+    System.out.println(titulo);
+  }
+
   public void cadastro() {
     Scanner ler1 = new Scanner(System.in);
     Scanner ler2 = new Scanner(System.in);
@@ -46,12 +50,12 @@ public class Livro {
     codigo = ler2.nextLine();
     System.out.println("\n------LIVRO CADASTRADO NO SISTEMA------\n");
     disponivel = true;
-    status(disponivel);
+    // status(disponivel);
     ler1.close();
     ler2.close();
   }
 
-  public boolean status(boolean disponivel) {
+  public boolean status() {
     return disponivel;
   }
 
@@ -71,7 +75,7 @@ public class Livro {
 
     System.out.println("\n------Empréstimo realizado com sucesso--------");
     disponivel = false;
-    status(disponivel);
+    // status(disponivel);
     ler.close();
   }
 
