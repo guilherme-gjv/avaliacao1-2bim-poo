@@ -100,7 +100,9 @@ public class Menu {
 
     // trocar o departamento do advogado
     void trocarDepAdvogado() {
-        // advogado[i].switchDepartamento();
+        System.out.println("Digite o código do advogado que você\nquer trocar de Departamento");
+        int i = ler.nextInt();
+        advogado[i].switchDepartamento();
     }
 
     void registro() {
