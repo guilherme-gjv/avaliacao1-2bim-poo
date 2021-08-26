@@ -89,12 +89,12 @@ public class Menu {
     void devolver() {
         // se for o caso, exibir o valor a pagar
         System.out.println("Qual livro voce quer devolver?");
-        int escolha=1;
-        while(escolha == 1){
-        int i = ler.nextInt();
-        livro[i].devolucao();
-        System.out.println("Deseja registrar outro? 1. Sim/ 2. Nao");
-        escolha = ler.nextInt();
+        int escolha = 1;
+        while (escolha == 1) {
+            int i = ler.nextInt();
+            livro[i].devolucao();
+            System.out.println("Deseja registrar outro? 1. Sim/ 2. Nao");
+            escolha = ler.nextInt();
         }
     }
 
@@ -128,8 +128,10 @@ public class Menu {
     // (solicitar o nome da área)
     void exibirLivrosEmprestados() {
         for (int i = 0; i <= 100; i++) {
+            if(livro[i].area == "sim"){
             if (livro[i].status() == true) {
                 livro[i].exibirTitulo();
+            }
             }
         }
     }

@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Livro {
-  private String titulo, autor, editora, area;
+  private String titulo, autor, editora;
+  public String area;
   private float preco;
   private String codigo;
   private boolean disponivel;
