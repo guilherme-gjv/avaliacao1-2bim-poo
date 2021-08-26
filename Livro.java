@@ -2,11 +2,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Livro {
-  private String titulo, autor, editora;
-  public String area;
+  private String titulo, autor, editora,emprestimo;
+  private String area;
   private float preco;
   private String codigo;
   private boolean disponivel;
@@ -49,6 +50,8 @@ public class Livro {
     preco = ler1.nextFloat();
     System.out.println("Por fim, atribua um código ao livro: ");
     codigo = ler2.nextLine();
+    codigo = gerarCodigo();
+    System.out.println("O código do livro é: " + codigo);
     System.out.println("\n------LIVRO CADASTRADO NO SISTEMA------\n");
     disponivel = true;
     // status(disponivel);
@@ -56,9 +59,7 @@ public class Livro {
     ler2.close();
   }
 
-  public boolean status() {
-    return disponivel;
-  }
+
 
   public void emprestimo() {
     Scanner ler = new Scanner(System.in);
@@ -78,6 +79,16 @@ public class Livro {
     disponivel = false;
     // status(disponivel);
     ler.close();
+  }
+  public void exibirEmprestimo() {
+    if (emprestimo != null && !disponivel) {
+      System.out.println("Titulo do livro emprestado: " + titulo);
+      System.out.println("Data do empréstimo: " + formato.format(dataEmprestimo));
+      System.out.println("Nome do advogado que solicitou o empréstimo: " + advogado.getNome());
+    } else {
+      System.out.println("Não há empréstimos!");
+    }
+
   }
 
   public void devolucao() {
@@ -113,6 +124,35 @@ public class Livro {
       }
       ler.close();
     }
+
+  }
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public String getCodigo() {
+    return codigo;
+  }
+  public boolean status() {
+    return disponivel;
+  }
+  public String getArea(){
+    return area;
+  }
+
+  private String gerarCodigo() {
+    // int qtdeMaximaCaracteres = 8;
+    int qtdeMaximaCaracteres = 6;
+    String[] caracteres = { "0", "1", "b", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
+        "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+
+    StringBuilder senha = new StringBuilder();
+
+    for (int i = 0; i < qtdeMaximaCaracteres; i++) {
+      int posicao = (int) (Math.random() * caracteres.length);
+      senha.append(caracteres[posicao]);
+    }
+    return senha.toString();
 
   }
 

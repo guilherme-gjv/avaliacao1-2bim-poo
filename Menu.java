@@ -52,7 +52,20 @@ public class Menu {
                 break;
 
             case 5:
-                exibirLivrosEmprestados();
+                System.out.println("1. Exibir todos os livros \n2. Escolher um livro específico");
+                escolha = ler.nextInt();
+                switch (escolha) {
+                    case 1:
+                        exibirLivrosEmprestados();
+                        break;
+                    case 2:
+                        String escolhaLivro = ler.nextLine();
+                        exibirLivrosEmprestados(escolhaLivro);
+                        break;
+                    default:
+                        break;
+                }
+
                 break;
             case 6:
                 registro();
@@ -126,13 +139,24 @@ public class Menu {
 
     // Exibir os títulos dos livros que estão emprestados de uma área específica
     // (solicitar o nome da área)
-    void exibirLivrosEmprestados() {
+    void exibirLivrosEmprestados(String escolhaLivro) {
+
         for (int i = 0; i <= 100; i++) {
-            if(livro[i].area == "sim"){
-            if (livro[i].status() == true) {
+            if (livro[i].getArea().equalsIgnoreCase(escolhaLivro)) {
+                if (livro[i].status() == false) {
+                    livro[i].exibirTitulo();
+                }
+            }
+        }
+    }
+
+    void exibirLivrosEmprestados() {
+
+        for (int i = 0; i <= 100; i++) {
+            if (livro[i].status() == false) {
                 livro[i].exibirTitulo();
             }
-            }
+
         }
     }
 }
