@@ -2,19 +2,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Livro {
-  private String titulo, autor, editora, area, dado, codigo, emprestimo;
+  private String titulo, autor, editora, area;
   private float preco;
-  private boolean disponivel = false;
+  private String codigo;
+  private boolean disponivel;
   private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
   Date dataEmprestimo;
   Date dataDevolucao;
-  Advogado advogado;
 
-  public Livro() {
+  public Livro() { 
     cadastro();
   }
 
@@ -27,6 +26,10 @@ public class Livro {
     System.out.println("Preço: " + preco);
     System.out.println("Código: " + codigo);
     System.out.println("\n-----------------------------------\n");
+  }
+
+  public void exibirTitulo() {
+    System.out.println(titulo);
   }
 
   public void cadastro() {
@@ -43,25 +46,28 @@ public class Livro {
     area = ler2.nextLine();
     System.out.println("Informe o preço do livro: ");
     preco = ler1.nextFloat();
-    codigo = gerarCodigo();
-    System.out.println("O código do livro é: " + codigo);
+    System.out.println("Por fim, atribua um código ao livro: ");
+    codigo = ler2.nextLine();
     System.out.println("\n------LIVRO CADASTRADO NO SISTEMA------\n");
     disponivel = true;
-
+    // status(disponivel);
+    ler1.close();
+    ler2.close();
   }
 
-  public boolean getDisponivel() {
+  public boolean status() {
     return disponivel;
+  }
+  public String getArea(){
+    return area;
   }
 
   public void emprestimo() {
     Scanner ler = new Scanner(System.in);
     System.out.println("\n----Fazendo empréstimo do livro-----");
     System.out.println("Informe a data do empréstimo(formato dd/MM/yyyy): ");
-    emprestimo = ler.nextLine();
-
+    String emprestimo = ler.nextLine();
     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
     try {
       dataEmprestimo = df.parse(emprestimo);
       System.out.println("Deu certo, a data é: " + formato.format(dataEmprestimo));
@@ -69,21 +75,11 @@ public class Livro {
       System.out.println("Deu erro");
       ex.printStackTrace();
     }
+
     System.out.println("\n------Empréstimo realizado com sucesso--------");
-
     disponivel = false;
-
-  }
-
-  public void exibirEmprestimo() {
-    if (emprestimo != null && !disponivel) {
-      System.out.println("Titulo do livro emprestado: " + titulo);
-      System.out.println("Data do empréstimo: " + formato.format(dataEmprestimo));
-      System.out.println("Nome do advogado que solicitou o empréstimo: " + advogado.getNome());
-    } else {
-      System.out.println("Não há empréstimos!");
-    }
-
+    // status(disponivel);
+    ler.close();
   }
 
   public void devolucao() {
@@ -129,27 +125,4 @@ public class Livro {
     return preco;
   }
 
-  public String getTitulo() {
-    return titulo;
-  }
-
-  public String getCodigo() {
-    return codigo;
-  }
-
-  private String gerarCodigo() {
-    // int qtdeMaximaCaracteres = 8;
-    int qtdeMaximaCaracteres = 6;
-    String[] caracteres = { "0", "1", "b", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
-        "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-
-    StringBuilder senha = new StringBuilder();
-
-    for (int i = 0; i < qtdeMaximaCaracteres; i++) {
-      int posicao = (int) (Math.random() * caracteres.length);
-      senha.append(caracteres[posicao]);
-    }
-    return senha.toString();
-
-  }
 }
