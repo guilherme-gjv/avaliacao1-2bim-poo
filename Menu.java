@@ -2,17 +2,21 @@ import java.util.Scanner;
 
 public class Menu {
 
+
     private Scanner ler = new Scanner(System.in);
     private Livro[] livro;
     private Advogado[] advogado;
     private int codigo_li = 0;// codigo livro
     private int codigo_ad = 0;// codigo advogado
+
     // após cada registro, o código aumenta +1 e não pode ser repetido!
 
     Menu() {
         // o ciclo só para quando a variavel escolha de exibirMenu() for 0
+
         //livro[100] = new Livro();
         //advogado[30] = new Advogado();
+
         int i = 1;
         do {
             exibirMenu();
@@ -68,6 +72,9 @@ public class Menu {
             case 6:
                 registro();
                 break;
+            case 6:
+                registro();
+                break;
 
             case 0:
                 System.exit(1);
@@ -77,7 +84,9 @@ public class Menu {
     }
 
     // Exibir Advogados, Livros, Empréstimos
+
     private void exibirAdLiEm() {
+
         System.out.println("---Advogados, Livros & Empréstimos---");
         int i;
         for (i = 0; i <= 30; i++) {
@@ -91,7 +100,9 @@ public class Menu {
         // falta o emprestimo
     }
 
+
     private void emprestimo() {
+
         System.out.println("Qual o codigo do livro que voce quer fazer empréstimo?");
         int i = ler.nextInt();
         livro[i].emprestimo();
@@ -100,12 +111,14 @@ public class Menu {
     private void devolver() {
         // se for o caso, exibir o valor a pagar
         System.out.println("Qual livro voce quer devolver?");
+
         int escolha = 1;
         while (escolha == 1) {
             int i = ler.nextInt();
             livro[i].devolucao();
             System.out.println("Deseja registrar outro? 1. Sim/ 2. Não");
             escolha = ler.nextInt();
+
         }
     }
 
@@ -131,6 +144,7 @@ public class Menu {
                 livro[codigo_li] = new Livro();
                 codigo_li++;
                 break;
+
             }
             System.out.println("Deseja registrar outro? 1. Sim/ 2. Nao");
             escolha = ler.nextInt();
@@ -139,6 +153,7 @@ public class Menu {
 
     // Exibir os títulos dos livros que estão emprestados de uma área específica
     // (solicitar o nome da área)
+
     private void exibirLivrosEmprestados(String selectedArea) {
 
         for (int i = 0; i <= 100; i++) {
@@ -156,6 +171,7 @@ public class Menu {
             if (livro[i].status() == false) {
                 livro[i].exibirTitulo();
             }
+
 
         }
     }
