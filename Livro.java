@@ -61,6 +61,12 @@ public class Livro {
   public String getArea(){
     return area;
   }
+  public String getTitulo(){
+    return titulo;
+  }
+  public String getCodigo(){
+    return codigo;
+  }
 
   public void emprestimo() {
     Scanner ler = new Scanner(System.in);

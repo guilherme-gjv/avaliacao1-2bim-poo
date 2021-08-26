@@ -7,13 +7,27 @@ public class Menu {
     private Advogado[] advogado;
     private int codigo_li = 0;// codigo livro
     private int codigo_ad = 0;// codigo advogado
+    String dado;
     // após cada registro, o código aumenta +1 e não pode ser repetido!
 
     Menu() {
         // o ciclo só para quando a variavel escolha de exibirMenu() for 0
         //livro[100] = new Livro();
         //advogado[30] = new Advogado();
-        int i = 1;
+        System.out.println("\nInforme a quantidade de livros que deseja cadastrar: ");
+        int i = ler.nextInt();
+        livro = new Livro[i];
+        for (i = 0; i < livro.length; i++) {
+            livro[i] = new Livro();
+        }
+        System.out.println("\nInforme a quantidade de advogados que deseja cadastrar: ");
+        int j = ler.nextInt();
+        advogado = new Advogado[j];
+        for (i = 0; i < advogado.length; i++) {
+            advogado[i] = new Advogado();
+        }
+        //int cont = 1;
+        i = 1;
         do {
             exibirMenu();
         } while (i == 1);
@@ -92,9 +106,25 @@ public class Menu {
     }
 
     private void emprestimo() {
-        System.out.println("Qual o codigo do livro que voce quer fazer empréstimo?");
-        int i = ler.nextInt();
-        livro[i].emprestimo();
+        //System.out.println("Qual o codigo do livro que voce quer fazer empréstimo?");
+        //int i = ler.nextInt();
+        
+      //  void emprestimo() {
+            Scanner ler = new Scanner(System.in);
+            for (int i = 0; i < livro.length; i++) {
+    
+                System.out.println("Informe o código ou titulo do livro a solicitar empréstimo: ");
+                dado = ler.nextLine();
+    
+                if (dado.equalsIgnoreCase(livro[i].getCodigo())
+                        || dado.equalsIgnoreCase(livro[i].getTitulo()) && livro[i].status() == true) {
+                    livro[i].emprestimo();
+                    break;
+                } else if (!livro[i].status()) {
+                    System.out.println("\nErro: LIVRO NÃO DISPONÍVEL!\n");
+                }
+            }
+        
     }
 
     private void devolver() {
