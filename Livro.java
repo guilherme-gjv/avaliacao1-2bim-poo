@@ -1,17 +1,10 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.Date;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Livro {
-  private String titulo, autor, editora, area, dado, codigo, emprestimo;
+  private String titulo, autor, editora, area, codigo;
   private float preco;
   private boolean disponivel = false;
-  private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-  Date dataEmprestimo;
-  Date dataDevolucao;
+
   Advogado advogado;
 
   public Livro() {
@@ -54,83 +47,12 @@ public class Livro {
     return disponivel;
   }
 
-  public void emprestimo() {
-    Scanner ler = new Scanner(System.in);
-    System.out.println("\n----Fazendo empréstimo do livro-----");
-    System.out.println("Informe a data do empréstimo(formato dd/MM/yyyy): ");
-    emprestimo = ler.nextLine();
-
-    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-    try {
-      dataEmprestimo = df.parse(emprestimo);
-      System.out.println("Deu certo, a data é: " + formato.format(dataEmprestimo));
-    } catch (Exception ex) {
-      System.out.println("Deu erro");
-      ex.printStackTrace();
-    }
-    System.out.println("\n------Empréstimo realizado com sucesso--------");
-
-    disponivel = false;
-
-  }
-
-  public void exibirEmprestimo() {
-    if (emprestimo != null && !disponivel) {
-      System.out.println("Titulo do livro emprestado: " + titulo);
-      System.out.println("Data do empréstimo: " + formato.format(dataEmprestimo));
-      System.out.println("Nome do advogado que solicitou o empréstimo: " + advogado.getNome());
-    } else {
-      System.out.println("Não há empréstimos!");
-    }
-
-  }
-
-  public void devolucao() {
-    if (dataEmprestimo != null) {
-      Scanner ler = new Scanner(System.in);
-      System.out.println("\n----Devolvendo o Livro----");
-      System.out.println("Informe a data de devolução(formato dd/MM/yyyy): ");
-      String devolucao = ler.nextLine();
-      DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-      try {
-        dataDevolucao = df.parse(devolucao);
-        System.out.println("Deu certo, a data é" + formato.format(dataDevolucao));
-      } catch (Exception ex) {
-        System.out.println("Deu errado");
-        ex.printStackTrace();
-      }
-
-      long diff = dataDevolucao.getTime() - dataEmprestimo.getTime();
-      TimeUnit time = TimeUnit.DAYS;
-      long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-      System.out.println("A diferenca é: " + diffrence);
-
-      float novopreco = 0;
-      if (diffrence > 10) {
-        while (diffrence > 10) {
-          novopreco = novopreco + calcular(preco);
-          diffrence--;
-        }
-        System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + novopreco);
-        ;
-      } else {
-        System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + preco);
-      }
-      ler.close();
-    }
-
-  }
-
-  public float calcular(float preco) {
-
-    preco = preco + preco * 10 / 100;
-
-    return preco;
-  }
-
   public String getTitulo() {
     return titulo;
+  }
+
+  public void setDisponivel(boolean disponivel) {
+    this.disponivel = disponivel;
   }
 
   public String getCodigo() {
@@ -151,5 +73,9 @@ public class Livro {
     }
     return senha.toString();
 
+  }
+
+  public float getPreco() {
+    return preco;
   }
 }
