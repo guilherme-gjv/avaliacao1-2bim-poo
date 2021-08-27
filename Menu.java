@@ -6,7 +6,9 @@ public class Menu {
     Scanner ler2 = new Scanner(System.in);
     Livro livro[];
     Advogado advogado[];
-    String dado;
+    Emprestimo emprestimo[] = new Emprestimo[1000];
+    String dado, cpf;
+    int contador = -1;
 
     Menu() {
         // o ciclo só para quando a variavel escolha de exibirMenu() for 0
@@ -48,7 +50,7 @@ public class Menu {
                 break;
 
             case 2:
-                emprestimo();
+                emprestimo2();
                 break;
 
             case 3:
@@ -64,6 +66,7 @@ public class Menu {
                 break;
 
             case 0:
+                System.out.println("-----SAINDO DO SISTEMA-----");
                 System.exit(1);
                 break;
         }
@@ -77,30 +80,80 @@ public class Menu {
         }
         for (int i = 0; i < livro.length; i++) {
             livro[i].exibir();
-            livro[i].exibirEmprestimo();
+
+        }
+        if (emprestimo != null) {
+            for (int i = 0; i < emprestimo.length; i++) {
+                if (emprestimo[i] != null) {
+                    emprestimo[i].exibir();
+                } else {
+                    break;
+                }
+
+            }
+        } else {
+            System.out.println("--Não há empréstimos!--");
         }
 
     }
 
-    void emprestimo() {
+    int w;
+
+    void emprestimo2() {
         Scanner ler = new Scanner(System.in);
-        for (int i = 0; i < livro.length; i++) {
 
-            System.out.println("Informe o código ou titulo do livro a solicitar empréstimo: ");
-            dado = ler.nextLine();
+        System.out.println("Informe o código ou titulo do livro a solicitar empréstimo: ");
+        dado = ler.nextLine();
+        for (int j = 0; j < livro.length; j++) {
 
-            if (dado.equalsIgnoreCase(livro[i].getCodigo())
-                    || dado.equalsIgnoreCase(livro[i].getTitulo()) && livro[i].getDisponivel() == true) {
-                livro[i].emprestimo();
+            if ((dado.equalsIgnoreCase(livro[j].getCodigo()) || dado.equalsIgnoreCase(livro[j].getTitulo()))
+                    && livro[j].getDisponivel()) {
+                System.out.println("Informe o cpf do advogado a solicitar empréstimo: ");
+                cpf = ler.nextLine();
+
+                for (int k = 0; k < advogado.length; k++) {
+                    if (cpf.equalsIgnoreCase(advogado[k].getCpf())) {
+                        for (w = 0; w < emprestimo.length; w++) {
+                            if (emprestimo[w] == null) {
+                                emprestimo[w] = new Emprestimo(advogado[k], livro[j]);
+                                break;
+                            }
+                        }
+                    }
+                    if (emprestimo[w] != null) {
+                        break;
+                    }
+                }
+
+            }
+            if (!livro[j].getDisponivel()) {
+                System.out.println("\nO livro não está disponível para empréstimos\n");
+            }
+            if (!dado.equalsIgnoreCase(livro[j].getCodigo()) || !dado.equalsIgnoreCase(livro[j].getTitulo())) {
+                System.out.println("\nError: Não foi possível realizar o empréstimo do livro!\n");
+            }
+            if (emprestimo[w] != null) {
                 break;
-            } else if (!livro[i].getDisponivel()) {
-                System.out.println("\nErro: LIVRO NÃO DISPONÍVEL!\n");
             }
         }
     }
 
     void devolver() {
-        // se for o caso, exibir o valor a pagar
+        Scanner ler = new Scanner(System.in);
+        System.out.println("\nInforme o código ou titulo do livro a ser devolvido: ");
+        dado = ler.nextLine();
+        for (int j = 0; j < livro.length; j++) {
+            if ((dado.equalsIgnoreCase(livro[j].getCodigo()) || dado.equalsIgnoreCase(livro[j].getTitulo()))
+                    && !livro[j].getDisponivel()) {
+                emprestimo[j].devolucao(livro[j]);
+                break;
+            }
+            if ((dado.equalsIgnoreCase(livro[j].getCodigo()) || dado.equalsIgnoreCase(livro[j].getTitulo()))
+                    && livro[j].getDisponivel()) {
+                System.out.println("\nError: Não foi possível realizar a devolução!\n");
+            }
+        }
+
     }
 
     // trocar o departamento do advogado
