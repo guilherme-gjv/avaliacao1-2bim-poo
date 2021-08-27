@@ -6,26 +6,15 @@ import java.util.concurrent.TimeUnit;
 
 public class Emprestimo {
   private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-  Date dataEmprestimo;
-  Date dataDevolucao;
-  String emprestimo, cpf;
-  Scanner ler1 = new Scanner(System.in);
-  Scanner ler2 = new Scanner(System.in);
-  Livro livro;
-  Advogado advogado;
-  String datafinal, titulo;
-  String nomeAdvogado;
+  private Date dataEmprestimo;
+  private Date dataDevolucao;
+  private String emprestimo, datafinal, titulo, nomeAdvogado;
+  private Scanner ler1 = new Scanner(System.in);
 
-  public void exibir() {
-    System.out.println("\n------Exibindo empréstimo------\n");
-    System.out.println("Titulo do livro emprestado: " + titulo);
-    System.out.println("Data do empréstimo: " + datafinal);
-    System.out.println("Nome do advogado que solicitou o empréstimo: " + nomeAdvogado);
-  }
-
+  // Construtor que solicitará empréstimo.
   public Emprestimo(Advogado advogado, Livro livro) {
     System.out.println("Informe a data do empréstimo(formato dd/MM/yyyy):");
-    emprestimo = ler2.nextLine();
+    emprestimo = ler1.nextLine();
     nomeAdvogado = advogado.getNome();
 
     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -44,6 +33,15 @@ public class Emprestimo {
 
   }
 
+  // Método para exibir dados do empréstimo.
+  public void exibir() {
+    System.out.println("\n------Exibindo empréstimo------\n");
+    System.out.println("Titulo do livro emprestado: " + titulo);
+    System.out.println("Data do empréstimo: " + datafinal);
+    System.out.println("Nome do advogado que solicitou o empréstimo: " + nomeAdvogado);
+  }
+
+  // Método para devolucao do livro.
   public void devolucao(Livro livro) {
     if (dataEmprestimo != null) {
       Scanner ler = new Scanner(System.in);
@@ -83,6 +81,7 @@ public class Emprestimo {
 
   }
 
+  // Método para calcular o preço do empréstimo após a devolução.
   public float calcular(float preco) {
 
     preco = preco + preco * 10 / 100;
