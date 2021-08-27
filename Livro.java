@@ -5,12 +5,11 @@ public class Livro {
   private float preco;
   private boolean disponivel = false;
 
-  Advogado advogado;
-
   public Livro() {
     cadastro();
   }
 
+  // Método para exibir dados do livro
   public void exibir() {
     System.out.println("\n---Exibindo informações do livro---\n");
     System.out.println("Titulo: " + titulo);
@@ -22,6 +21,7 @@ public class Livro {
     System.out.println("\n-----------------------------------\n");
   }
 
+  // Método para cadastro do livro
   public void cadastro() {
     Scanner ler1 = new Scanner(System.in);
     Scanner ler2 = new Scanner(System.in);
@@ -43,6 +43,25 @@ public class Livro {
 
   }
 
+  // Método para gerar código do livro
+  private String gerarCodigo() {
+    // int qtdeMaximaCaracteres = 8;
+    int qtdeMaximaCaracteres = 6;
+    String[] caracteres = { "0", "1", "b", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
+        "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+
+    StringBuilder senha = new StringBuilder();
+
+    for (int i = 0; i < qtdeMaximaCaracteres; i++) {
+      int posicao = (int) (Math.random() * caracteres.length);
+      senha.append(caracteres[posicao]);
+    }
+    return senha.toString();
+
+  }
+
+  // ---------- MÉTODOS GET E SET-------------
+
   public boolean getDisponivel() {
     return disponivel;
   }
@@ -59,20 +78,8 @@ public class Livro {
     return codigo;
   }
 
-  private String gerarCodigo() {
-    // int qtdeMaximaCaracteres = 8;
-    int qtdeMaximaCaracteres = 6;
-    String[] caracteres = { "0", "1", "b", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
-        "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-
-    StringBuilder senha = new StringBuilder();
-
-    for (int i = 0; i < qtdeMaximaCaracteres; i++) {
-      int posicao = (int) (Math.random() * caracteres.length);
-      senha.append(caracteres[posicao]);
-    }
-    return senha.toString();
-
+  public String getArea() {
+    return area;
   }
 
   public float getPreco() {
