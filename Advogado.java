@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Advogado {
@@ -61,7 +62,7 @@ public class Advogado {
 
     // pode ser usado tanto no construtor quanto para trocar o departamento
     public void exibir() {
-        System.out.println("Exibindo dados do Advogado");
+        System.out.println("\n------Exibindo dados do Advogado-------\n");
         System.out.println("Nome: " + nome);
         System.out.println("CPF: " + cpf);
         System.out.println("Telefone: " + telefone);
@@ -69,7 +70,8 @@ public class Advogado {
         System.out.println("Departamento em que atua: " + departament);
     }
 
-    public void solicitarEmprestimo() {
-        livro.emprestimo();
+    public String getCpf() {
+        return cpf;
     }
+
 }
