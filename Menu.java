@@ -1,17 +1,19 @@
 import java.util.Scanner;
 
 public class Menu {
-    int i, j;
-    Scanner ler1 = new Scanner(System.in);
-    Scanner ler2 = new Scanner(System.in);
-    Livro livro[];
-    Advogado advogado[];
-    Emprestimo emprestimo[] = new Emprestimo[1000];
-    String dado, cpf;
-    int contador = -1;
+    private int i, j, w, contador = -1;
+    private Scanner ler1 = new Scanner(System.in);
+    private Scanner ler2 = new Scanner(System.in);
+    private Livro livro[];
+    private Advogado advogado[];
+    private Emprestimo emprestimo[] = new Emprestimo[1000];
+    private String dado, cpf;
 
-    Menu() {
-        // o ciclo só para quando a variavel escolha de exibirMenu() for 0
+    /*
+     * Construtor para informar quantos livros/advogados vão ter no sistema e exibir
+     * o menu do gerenciamento.
+     */
+    public Menu() {
         System.out.println("\nInforme a quantidade de livros que deseja cadastrar: ");
         i = ler1.nextInt();
         livro = new Livro[i];
@@ -30,19 +32,18 @@ public class Menu {
         } while (cont != 0);
     }
 
-    void exibirMenu() {
+    // Método para exibir o menu
+    private void exibirMenu() {
         int escolha;
         System.out.println("\n-----Escritório Advogados S.A.------\n");
-        System.out.println(">Gerenciamento de Livros\nDigite...");
+        System.out.println("> Menu de Gerenciamento da Empresa\nDigite...");
         System.out.println("1. Exibir Advogados, Livros e Empréstimos.");
-        System.out.println("2. Solicitar empréstimo");
-        System.out.println("3. Devolver");
-        System.out.println("4. Trocar Departamento de um Advogado");
-        System.out.println("5. Exibir livros emprestados.");
+        System.out.println("2. Solicitar empréstimo de um livro");
+        System.out.println("3. Devolver livro");
+        System.out.println("4. Trocar Advogado de Departamento");
+        System.out.println("5. Exibir livros emprestados de uma determinada área.");
         System.out.println("0. Sair.");
-
         escolha = ler1.nextInt();
-        // provisorio
 
         switch (escolha) {
             case 1:
@@ -50,7 +51,7 @@ public class Menu {
                 break;
 
             case 2:
-                emprestimo2();
+                emprestimo();
                 break;
 
             case 3:
@@ -73,8 +74,8 @@ public class Menu {
 
     }
 
-    // Exibir Advogados, Livros, Empréstimos
-    void exibirAdLiEm() {
+    // Método para exibir Advogados, Livros, Empréstimos
+    private void exibirAdLiEm() {
         for (int i = 0; i < advogado.length; i++) {
             advogado[i].exibir();
         }
@@ -97,11 +98,10 @@ public class Menu {
 
     }
 
-    int w;
-
-    void emprestimo2() {
+    // Método para solicitar emprestimo de um livro
+    private void emprestimo() {
         Scanner ler = new Scanner(System.in);
-
+        contador++;
         System.out.println("Informe o código ou titulo do livro a solicitar empréstimo: ");
         dado = ler.nextLine();
         for (int j = 0; j < livro.length; j++) {
@@ -124,21 +124,23 @@ public class Menu {
                         break;
                     }
                 }
-
+                if (emprestimo[w] != null) {
+                    break;
+                }
             }
-            if (!livro[j].getDisponivel()) {
-                System.out.println("\nO livro não está disponível para empréstimos\n");
-            }
-            if (!dado.equalsIgnoreCase(livro[j].getCodigo()) || !dado.equalsIgnoreCase(livro[j].getTitulo())) {
-                System.out.println("\nError: Não foi possível realizar o empréstimo do livro!\n");
-            }
-            if (emprestimo[w] != null) {
+            if ((dado.equalsIgnoreCase(livro[j].getCodigo()) || dado.equalsIgnoreCase(livro[j].getTitulo()))
+                    && !livro[j].getDisponivel()) {
+                System.out.println("\nErro: livro não disponível!");
                 break;
             }
         }
+        if (emprestimo[contador] == null) {
+            System.out.println("\nErro ao solicitar empréstimo! ");
+        }
     }
 
-    void devolver() {
+    // Método para devolver um livro.
+    private void devolver() {
         Scanner ler = new Scanner(System.in);
         System.out.println("\nInforme o código ou titulo do livro a ser devolvido: ");
         dado = ler.nextLine();
@@ -156,14 +158,28 @@ public class Menu {
 
     }
 
-    // trocar o departamento do advogado
-    void trocarDepAdvogado() {
-        advogado[j].switchDepartamento();
+    // Método para trocar advogado de departamento
+    private void trocarDepAdvogado() {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("\nInforme o nome do advogado a ser transferido de departamento: ");
+        String nome = ler.nextLine();
+        for (int i = 0; i < advogado.length; i++) {
+            if (nome.equalsIgnoreCase(advogado[i].getNome())) {
+                advogado[i].mudarDepartamento(advogado[i].getNomeDep());
+                break;
+            }
+        }
     }
 
-    // Exibir os títulos dos livros que estão emprestados de uma área específica
-    // (solicitar o nome da área)
-    void exibirLivrosEmprestados() {
-
+    // Método para exibir livros emprestados de uma determinada área.
+    private void exibirLivrosEmprestados() {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("\nInforme o nome da área na qual se deseja saber os livros que foram emprestados: ");
+        String area = ler.nextLine();
+        for (int i = 0; i < livro.length; i++) {
+            if (area.equalsIgnoreCase(livro[i].getArea()) && livro[i].getDisponivel() == false) {
+                System.out.println("\n--" + livro[i].getTitulo() + "--");
+            }
+        }
     }
 }
