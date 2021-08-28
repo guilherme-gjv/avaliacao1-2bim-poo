@@ -14,7 +14,8 @@ public class Menu {
      * o menu do gerenciamento.
      */
     public Menu() {
-
+        livro = new Livro[100];
+        advogado = new Advogado[25];
         registrar();
         
         int cont = 1;
@@ -179,16 +180,32 @@ public class Menu {
     }
     private void registrar(){
         System.out.println("\nInforme a quantidade de livros que deseja cadastrar: ");
-        i = ler1.nextInt();
-        livro = new Livro[i];
-        for (int i = 0; i < livro.length; i++) {
-            livro[i] = new Livro();
+        int c = ler1.nextInt();
+        int t = 0;
+        while(livro[i] != null){
+            t++;
+            i++;
         }
+        
+        System.out.println("o valor de t "+t);
+        //for (int i = 0; i < livro.length; i++) {
+        for (int i = 0; i <= c-1; i++) {
+            livro[i+t] = new Livro();
+        }
+
+
+        t = 0;
+        while(advogado[i] != null){
+            t++;
+            i++;
+            
+        }
+        
         System.out.println("\nInforme a quantidade de advogados que deseja cadastrar: ");
         j = ler2.nextInt();
-        advogado = new Advogado[j];
-        for (int i = 0; i < advogado.length; i++) {
-            advogado[i] = new Advogado();
+        //for (int i = 0; i < advogado.length; i++) {
+        for (int i = 0; i <= j-1; i++) {
+            advogado[i+t] = new Advogado();
         }
     }
 }
