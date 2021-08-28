@@ -14,18 +14,9 @@ public class Menu {
      * o menu do gerenciamento.
      */
     public Menu() {
-        System.out.println("\nInforme a quantidade de livros que deseja cadastrar: ");
-        i = ler1.nextInt();
-        livro = new Livro[i];
-        for (int i = 0; i < livro.length; i++) {
-            livro[i] = new Livro();
-        }
-        System.out.println("\nInforme a quantidade de advogados que deseja cadastrar: ");
-        j = ler2.nextInt();
-        advogado = new Advogado[j];
-        for (int i = 0; i < advogado.length; i++) {
-            advogado[i] = new Advogado();
-        }
+
+        registrar();
+        
         int cont = 1;
         do {
             exibirMenu();
@@ -42,6 +33,7 @@ public class Menu {
         System.out.println("3. Devolver livro");
         System.out.println("4. Trocar Advogado de Departamento");
         System.out.println("5. Exibir livros emprestados de uma determinada área.");
+        System.out.println("6. Registrar");
         System.out.println("0. Sair.");
         escolha = ler1.nextInt();
 
@@ -65,6 +57,9 @@ public class Menu {
             case 5:
                 exibirLivrosEmprestados();
                 break;
+            case 6:
+                registrar();
+            break;
 
             case 0:
                 System.out.println("-----SAINDO DO SISTEMA-----");
@@ -182,4 +177,20 @@ public class Menu {
             }
         }
     }
+    private void registrar(){
+        System.out.println("\nInforme a quantidade de livros que deseja cadastrar: ");
+        i = ler1.nextInt();
+        livro = new Livro[i];
+        for (int i = 0; i < livro.length; i++) {
+            livro[i] = new Livro();
+        }
+        System.out.println("\nInforme a quantidade de advogados que deseja cadastrar: ");
+        j = ler2.nextInt();
+        advogado = new Advogado[j];
+        for (int i = 0; i < advogado.length; i++) {
+            advogado[i] = new Advogado();
+        }
+    }
 }
+
+    
