@@ -35,7 +35,7 @@ public class Menu {
     // Método para exibir o menu
     private void exibirMenu() {
         int escolha;
-        System.out.println("\n-----Escritório Advogados S.A.------\n");
+        System.out.println("\n-----IFAL - Instituição Federal de Advocacia Legal-----\n");
         System.out.println("> Menu de Gerenciamento da Empresa\nDigite...");
         System.out.println("1. Exibir Advogados, Livros e Empréstimos.");
         System.out.println("2. Solicitar empréstimo de um livro");
