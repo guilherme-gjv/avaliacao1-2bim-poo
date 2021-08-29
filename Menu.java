@@ -109,14 +109,16 @@ public class Menu {
     private void emprestimo() {
         Scanner ler = new Scanner(System.in);
 
-        if (advogado.isEmpty()) {
+        if (advogado.isEmpty()||livro.isEmpty()) {
+            if(advogado.isEmpty()){
             System.out.println(
                     "\nError: não é possível fazer empréstimo. Motivo: Não há advogados cadastrados no sistema!");
         }
-        if (livro.isEmpty()) {
+        if (livro.isEmpty()){
             System.out
                     .println("\nError: não é possível fazer empréstimo. Motivo: Não há livros cadastrados no sistema!");
-        } else {
+        } 
+        }else {
             System.out.println("Informe o código ou titulo do livro a solicitar empréstimo: ");
             dado = ler.nextLine();
             for (int j = 0; j < livro.size(); j++) {
