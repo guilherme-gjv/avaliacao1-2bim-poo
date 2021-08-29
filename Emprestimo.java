@@ -10,22 +10,24 @@ public class Emprestimo {
   private Date dataDevolucao;
   private String emprestimo, datafinal, titulo, nomeAdvogado;
   private Scanner ler1 = new Scanner(System.in);
+  private String codigo;
+  private Livro livro;
+  private boolean devolvido;
 
   // Construtor que solicitará empréstimo.
   public Emprestimo(Advogado advogado, Livro livro) {
     System.out.println("Informe a data do empréstimo(formato dd/MM/yyyy):");
     emprestimo = ler1.nextLine();
     nomeAdvogado = advogado.getNome();
-
     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     try {
       dataEmprestimo = df.parse(emprestimo);
       datafinal = formato.format(dataEmprestimo);
-      System.out.println("Deu certo, a data é: " + datafinal);
+      System.out.println("Deu certo, a data do empréstimo é: " + datafinal);
       livro.setDisponivel(false);
     } catch (Exception e) {
-      System.out.println("Deu erro");
+      System.out.println("----Houve algum erro com a data----");
       e.printStackTrace();
     }
     System.out.println("\n------Empréstimo realizado com sucesso--------");
@@ -39,6 +41,7 @@ public class Emprestimo {
     System.out.println("Titulo do livro emprestado: " + titulo);
     System.out.println("Data do empréstimo: " + datafinal);
     System.out.println("Nome do advogado que solicitou o empréstimo: " + nomeAdvogado);
+    System.out.println("\n-----------------------------------\n");
   }
 
   // Método para devolucao do livro.
@@ -51,32 +54,33 @@ public class Emprestimo {
       DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
       try {
         dataDevolucao = df.parse(devolucao);
-        System.out.println("Deu certo, a data é" + formato.format(dataDevolucao));
+        long diff = dataDevolucao.getTime() - dataEmprestimo.getTime();
+        TimeUnit time = TimeUnit.DAYS;
+        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+        long auxiliar = diffrence;
+        float novopreco = 0;
+        System.out.println("Deu certo, a data da devolução é: " + formato.format(dataDevolucao));
+        if (auxiliar > 10) {
+          while (auxiliar > 10) {
+            novopreco = novopreco + calcular(livro.getPreco());
+            auxiliar--;
+          }
+          System.out
+              .println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + novopreco);
+          livro.setDisponivel(true);
+          ;
+        } else {
+          System.out.println(
+              "Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + livro.getPreco());
+          livro.setDisponivel(true);
+        }
+
+        devolvido = true;
       } catch (Exception ex) {
-        System.out.println("Deu errado");
+        System.out.println("Houve algum erro com a data.");
         ex.printStackTrace();
       }
 
-      long diff = dataDevolucao.getTime() - dataEmprestimo.getTime();
-      TimeUnit time = TimeUnit.DAYS;
-      long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-      long auxiliar = diffrence;
-      System.out.println("A diferenca é: " + diffrence);
-
-      float novopreco = 0;
-      if (auxiliar > 10) {
-        while (auxiliar > 10) {
-          novopreco = novopreco + calcular(livro.getPreco());
-          auxiliar--;
-        }
-        System.out.println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + novopreco);
-        livro.setDisponivel(true);
-        ;
-      } else {
-        System.out
-            .println("Livro devolvido em " + diffrence + " dias, o preço a se pagar pelo livro é: " + livro.getPreco());
-        livro.setDisponivel(true);
-      }
     }
 
   }
@@ -87,6 +91,15 @@ public class Emprestimo {
     preco = preco + preco * 10 / 100;
 
     return preco;
+  }
+
+  // -----MÉTODOS GET -----------
+  public Date getDataEmprestimo() {
+    return dataEmprestimo;
+  }
+
+  public boolean getDevolvido() {
+    return devolvido;
   }
 
 }

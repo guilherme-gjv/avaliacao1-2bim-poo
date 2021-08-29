@@ -18,6 +18,7 @@ public class Advogado {
 
     // Método para cadastro dos advogados
     private void cadastro() {
+        System.out.println("\n----Sistema de Cadastro de Advogados -------\n");
         System.out.println("Nome do advogado: ");
         nome = ler1.nextLine();
         System.out.println("Número do CPF: ");
@@ -27,6 +28,7 @@ public class Advogado {
         System.out.println("Data que foi admitido: ");
         data_admitido = ler2.nextLine();
         saberDepartamento();
+        System.out.println("\n------ADVOGADO CADASTRADO NO SISTEMA------\n");
 
     }
 
@@ -59,6 +61,7 @@ public class Advogado {
         System.out.println("Telefone: " + telefone);
         System.out.println("Data de admissão: " + data_admitido);
         System.out.println("Departamento em que atua: " + departament);
+        System.out.println("\n-----------------------------------\n");
     }
 
     // Método para mudar o advogado de departamento
